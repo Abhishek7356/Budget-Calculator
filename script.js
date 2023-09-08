@@ -11,16 +11,16 @@ function register() {
         accountDetails.userName = regName.value;
         accountDetails.userPassword = regPassword.value;
         accountDetails.userBalance = 0;
+        accountDetails.income = 0;
+        accountDetails.expense = 0;
         console.log(accountDetails);
         if (accountDetails.userName in localStorage) {
             alert('user allready registered');
         } else {
             localStorage.setItem(regName.value, JSON.stringify(accountDetails));
-            localStorage.setItem(`userName${regName.value}`, regName.value);
             alert('Registration successfull.');
             location = '../';
             regName.value = '';
-            regAcno.value = '';
         }
     }
 
@@ -38,22 +38,19 @@ function signin() {
             // document.getElementById('incorrect2').style.display = 'none';
             // document.getElementById('loginAcno').style.borderBottom = '2px solid gray';
             if (loginPassword.value == acnoDetails.userPassword) {
-                Acno = acnoDetails.userPassword;
+                localStorage.setItem("userName", loginName.value)
                 alert('Login Success');
                 location = './homePage';
-                let UserKey = localStorage.getItem(`userName${loginName.value}`)
-                localStorage.setItem("userName", UserKey)
                 localStorage.setItem("userDetails", JSON.stringify(acnoDetails));
-                console.log(UserKey);
                 document.getElementById('incorrect').style.display = 'none';
                 document.getElementById('loginPassword').style.borderBottom = '2px solid gray';
             } else {
-                document.getElementById('incorrect').style.display = 'block';
-                document.getElementById('loginPassword').style.borderBottom = '2px solid red';
+                // document.getElementById('incorrect').style.display = 'block';
+                // document.getElementById('loginPassword').style.borderBottom = '2px solid red';
             }
         } else {
-            document.getElementById('incorrect2').style.display = 'block';
-            document.getElementById('loginAcno').style.borderBottom = '2px solid red';
+            // document.getElementById('incorrect2').style.display = 'block';
+            // document.getElementById('loginAcno').style.borderBottom = '2px solid red';
         }
     }
 }
@@ -62,6 +59,8 @@ function pageLoad() {
     document.getElementById('Username').innerHTML = `Welcome ${localStorage.getItem("userName")}`;
     let balance = JSON.parse(localStorage.getItem("userDetails"));
     document.getElementById('amount').innerHTML = `&#8377; ${balance.userBalance}`
+    document.getElementById('incomeAmount').innerHTML = `&#8377; ${balance.income}`
+    document.getElementById('expenseAmount').innerHTML = `&#8377; ${balance.expense}`
 }
 
 function deposite() {
@@ -76,7 +75,9 @@ function deposite() {
         let depoAmount = Number(deposite.value);
         console.log(depoAmount);
         userDetails.userBalance += depoAmount;
+        userDetails.income += depoAmount;
         amount.innerHTML = `&#8377; ${userDetails.userBalance}`;
+        incomeAmount.innerHTML = `&#8377; ${userDetails.income}`;
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
         alert("Amount credited succesfully")
         deposite.value = '';
@@ -96,12 +97,23 @@ function withdraw() {
         let depoAmount = Number(withdraw.value);
         console.log(depoAmount);
         userDetails.userBalance -= depoAmount;
+        userDetails.expense += depoAmount;
         amount.innerHTML = `&#8377; ${userDetails.userBalance}`;
+        expenseAmount.innerHTML = `&#8377; ${userDetails.expense}`;
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
         alert("Amount Debited succesfully")
         withdraw.value = '';
         wpassword.value = '';
     }
+}
+
+function resetBalance(balanceType) {
+    let userDetailes = JSON.parse(localStorage.getItem("userDetails"));
+    userDetailes[balanceType] = 0;
+    expenseAmount.innerHTML = `&#8377; ${userDetailes.expense}`;
+    incomeAmount.innerHTML = `&#8377; ${userDetailes.income}`;
+    localStorage.setItem("userDetails", JSON.stringify(userDetailes));
+
 }
 
 
