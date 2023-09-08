@@ -1,0 +1,54 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header img {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+ /* .outerBox{
+    border: 1px solid red;
+    padding: 10px 20px;
+} */
+.balance{
+    padding: 30px;
+    background-color: rgb(69, 69, 235);
+    color: white;
+    border-radius: 5px;
+} 
+.balanceDetails{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.balanceDetails p{
+    margin: 0;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    padding-top: 5px;
+}
+.buttons button{
+    width: 50%;
+}
+.history{
+    display: flex;
+    justify-content: space-around;
+    font-size: 19px;
+    margin-top: 10px;
+    padding: 6px;
+    border-bottom: 1px solid rgb(120, 120, 238);
+}
+.history p{
+    margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+    
+}
