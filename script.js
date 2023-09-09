@@ -65,6 +65,9 @@ function pageLoad() {
     document.getElementById('expenseAmount').innerHTML = `&#8377; ${balance.expense}`;
     if (balance.datas != undefined) {
         document.getElementById('innerContainer').innerHTML = balance.datas;
+        document.getElementById('noHistory').style.display = 'none';
+    }else{
+        document.getElementById('innerContainer').style.display = 'none';
     }
 }
 
@@ -88,10 +91,11 @@ function deposite() {
         userDetails.income += depoAmount;
         amount.innerHTML = `&#8377; ${userDetails.userBalance}`;
         incomeAmount.innerHTML = `&#8377; ${userDetails.income}`;
+        document.getElementById('innerContainer').style.display = 'flex';
+        document.getElementById('noHistory').style.display = 'none';
         history(deposite.value, description.value, 'incomeHis');
         let container = document.getElementById('innerContainer');
         userDetails.datas = container.innerHTML;
-
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
         deposite.value = '';
         description.value = '';
@@ -113,6 +117,8 @@ function withdraw() {
         userDetails.expense += depoAmount;
         amount.innerHTML = `&#8377; ${userDetails.userBalance}`;
         expenseAmount.innerHTML = `&#8377; ${userDetails.expense}`;
+        document.getElementById('innerContainer').style.display = 'flex';
+        document.getElementById('noHistory').style.display = 'none';
         history(withdraw.value, wpassword.value, 'expenseHis');
         let container = document.getElementById('innerContainer');
         userDetails.datas = container.innerHTML;

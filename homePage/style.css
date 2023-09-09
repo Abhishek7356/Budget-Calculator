@@ -37,12 +37,16 @@ header img {
 .buttons button{
     width: 50%;
 }
+.balanceDetails p{
+    font-size: 15px;
+}
+
 .history{
     display: flex;
     justify-content: space-around;
-    font-size: 19px;
+    font-size: 18px;
     margin-top: 10px;
-    padding: 6px;
+    padding: 5px;
     border-radius: 4px;
 }
 .history p{
@@ -54,7 +58,10 @@ header img {
 #incomeHis .history{
     border: 1px solid green;
 }
-
+.small{
+    margin-top: 100px;
+    text-align: center;
+}
 
 
 @media screen and (max-width: 600px) {
