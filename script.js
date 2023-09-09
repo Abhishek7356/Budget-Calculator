@@ -36,21 +36,23 @@ function signin() {
             let acnoDetails = JSON.parse(localStorage.getItem(loginName.value));
             // console.log(acnoDetails);
             // document.getElementById('incorrect2').style.display = 'none';
-            // document.getElementById('loginAcno').style.borderBottom = '2px solid gray';
+            document.getElementById('loginName').style.borderBottom = '2px solid white';
             if (loginPassword.value == acnoDetails.userPassword) {
                 localStorage.setItem("userName", loginName.value)
                 alert('Login Success');
                 location = './homePage';
                 localStorage.setItem("userDetails", JSON.stringify(acnoDetails));
-                document.getElementById('incorrect').style.display = 'none';
+                // document.getElementById('incorrect').style.display = 'none';
                 document.getElementById('loginPassword').style.borderBottom = '2px solid gray';
             } else {
                 // document.getElementById('incorrect').style.display = 'block';
-                // document.getElementById('loginPassword').style.borderBottom = '2px solid red';
+                document.getElementById('loginPassword').style.borderBottom = '2px solid red';
+                alert('incorrect password');
             }
         } else {
             // document.getElementById('incorrect2').style.display = 'block';
-            // document.getElementById('loginAcno').style.borderBottom = '2px solid red';
+            document.getElementById('loginName').style.borderBottom = '2px solid red';
+            alert('User not found');
         }
     }
 }
@@ -60,7 +62,15 @@ function pageLoad() {
     let balance = JSON.parse(localStorage.getItem("userDetails"));
     document.getElementById('amount').innerHTML = `&#8377; ${balance.userBalance}`
     document.getElementById('incomeAmount').innerHTML = `&#8377; ${balance.income}`
-    document.getElementById('expenseAmount').innerHTML = `&#8377; ${balance.expense}`
+    document.getElementById('expenseAmount').innerHTML = `&#8377; ${balance.expense}`;
+    if (balance.datas != undefined) {
+        document.getElementById('innerContainer').innerHTML = balance.datas;
+    }
+}
+
+function pageUnload() {
+    let dbs = JSON.parse(localStorage.getItem("userDetails"));
+    localStorage.setItem(dbs.userName, JSON.stringify(dbs));
 }
 
 function deposite() {
@@ -78,8 +88,11 @@ function deposite() {
         userDetails.income += depoAmount;
         amount.innerHTML = `&#8377; ${userDetails.userBalance}`;
         incomeAmount.innerHTML = `&#8377; ${userDetails.income}`;
+        history(deposite.value, description.value, 'incomeHis');
+        let container = document.getElementById('innerContainer');
+        userDetails.datas = container.innerHTML;
+
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
-        alert("Amount credited succesfully")
         deposite.value = '';
         description.value = '';
     }
@@ -100,8 +113,10 @@ function withdraw() {
         userDetails.expense += depoAmount;
         amount.innerHTML = `&#8377; ${userDetails.userBalance}`;
         expenseAmount.innerHTML = `&#8377; ${userDetails.expense}`;
+        history(withdraw.value, wpassword.value, 'expenseHis');
+        let container = document.getElementById('innerContainer');
+        userDetails.datas = container.innerHTML;
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
-        alert("Amount Debited succesfully")
         withdraw.value = '';
         wpassword.value = '';
     }
@@ -121,3 +136,26 @@ function clearAll() {
     localStorage.clear();
     location = '../sighUpPage';
 }
+
+
+function history(amount, source, container) {
+    let mainDiv = document.getElementById(container);
+    let div = document.createElement('div');
+    div.classList.add("history");
+    let p1 = document.createElement('p');
+    p1.innerHTML = source;
+    div.appendChild(p1);
+    let p2 = document.createElement('p');
+    p2.innerHTML = `&#8377; ${amount}`;
+    div.appendChild(p2);
+    mainDiv.appendChild(div);
+    console.log('hello');
+}
+
+// function saveData() {
+//     let container = document.getElementById('innerContainer');
+//     let acnoDetails = JSON.parse(localStorage.getItem('userDetails'));
+//     acnoDetails.datas = container.innerHTML;
+//     console.log(acnoDetails);
+//     localStorage.setItem('userDetails', JSON.stringify(acnoDetails));
+// }
