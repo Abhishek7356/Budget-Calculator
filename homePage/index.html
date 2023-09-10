@@ -22,7 +22,7 @@
 
     <style>
         body {
-            font-family: 'Akshar';
+            font-family: 'Alexandria';
             /* background-color: rgb(230, 227, 227); */
         }
     </style>
@@ -53,9 +53,9 @@
                                     <a class="nav-link text-light" href="#">Pricing</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a onclick="clearAll()"
+                                    <a onclick="clearAll()" style="cursor: pointer;"
                                         class="text-center nav-link bg-primary text-light rounded-pill ms-3">Log
-                                        Out</a>
+                                        Out   <i class="fa-solid fa-right-from-bracket"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -103,7 +103,8 @@
                                     <div class="modal-body p-5">
                                         <input id="description" class="form-control mb-3" type="text"
                                             placeholder="Income Source">
-                                        <input id="deposite" class="form-control mb-3" type="text" placeholder="Amount">
+                                        <input id="deposite" class="form-control mb-3" type="number"
+                                            placeholder="Amount">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" onclick="deposite()" class="btn rounded-pill btn-success"
@@ -128,7 +129,8 @@
                                     <div class="modal-body p-5">
                                         <input id="incomeSource" class="form-control mb-3" type="text"
                                             placeholder="Expense Source">
-                                        <input id="withdraw" class="form-control mb-3" type="text" placeholder="Amount">
+                                        <input id="withdraw" class="form-control mb-3" type="number"
+                                            placeholder="Amount">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn rounded-pill btn-danger"
@@ -149,9 +151,12 @@
     <section>
         <div class="container">
             <div id="innerContainer" class="row text-light text-center">
-                <div id="incomeHis" class="col-md-6  mt-5 p-3">
-                    <h4 class="mb-4 text-light">Income history<hr></h4>
-                    <!-- <div class="history">
+                <div class="col-md-6 mt-5 p-3">
+                    <h4 class="mb-4 text-light">Income history
+                        <hr>
+                    </h4>
+                    <div id="incomeHis">
+                        <!-- <div class="history">
                         <p>Salary</p>
                         <p>35000</p>
                     </div>
@@ -163,12 +168,14 @@
                         <p>Salary</p>
                         <p>35000</p>
                     </div> -->
+                    </div>
                 </div>
-                <div id="expenseHis" class="col-md-6 mt-5 p-3">
+                <div class="col-md-6 mt-5 p-3">
                     <h4 class="mb-4">Expense history
                         <hr>
                     </h4>
-                    <!-- <div class="history">
+                    <div id="expenseHis">
+                        <!-- <div class="history">
                         <p>Salary</p>
                         <p>35000</p>
                     </div>
@@ -180,6 +187,18 @@
                         <p>Salary</p>
                         <p>35000</p>
                     </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button id="clearBtn" style="margin: auto;" onclick="clearHistory()"
+                        class="btn btn-outline-danger rounded-pill">Clear history !</button>
                 </div>
             </div>
         </div>

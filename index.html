@@ -46,8 +46,14 @@
                         <h4>Log In</h4>
                         <i class="m-1 fa-solid fa-right-to-bracket fa-lg" style="color: #0f56d2;"></i>
                         <div class="inputBox">
-                            <input type="text" id="loginName" placeholder="Enter User Name">
-                            <input type="password" id="loginPassword" placeholder="Enter Your Password">
+                            <div class="outerInput">
+                                <input type="text" id="loginName" placeholder="Enter User Name">
+                                <small id="incorrect2" class="text-danger errorMsg">User name not found !</small>
+                            </div>
+                            <div class="outerInput">
+                                <input type="password" id="loginPassword" placeholder="Enter Your Password">
+                                <small id="incorrect" class="text-danger errorMsg">Incorrect Password !</small>
+                            </div>
                             <div>
                                 <small><a href="#">Forgot Password?</a></small>
                             </div>

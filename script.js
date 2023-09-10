@@ -34,25 +34,22 @@ function signin() {
     } else {
         if (loginName.value in localStorage) {
             let acnoDetails = JSON.parse(localStorage.getItem(loginName.value));
-            // console.log(acnoDetails);
-            // document.getElementById('incorrect2').style.display = 'none';
+            document.getElementById('incorrect2').style.display = 'none';
             document.getElementById('loginName').style.borderBottom = '2px solid white';
             if (loginPassword.value == acnoDetails.userPassword) {
                 localStorage.setItem("userName", loginName.value)
                 alert('Login Success');
                 location = './homePage';
                 localStorage.setItem("userDetails", JSON.stringify(acnoDetails));
-                // document.getElementById('incorrect').style.display = 'none';
+                document.getElementById('incorrect').style.display = 'none';
                 document.getElementById('loginPassword').style.borderBottom = '2px solid gray';
             } else {
-                // document.getElementById('incorrect').style.display = 'block';
+                document.getElementById('incorrect').style.display = 'block';
                 document.getElementById('loginPassword').style.borderBottom = '2px solid red';
-                alert('incorrect password');
             }
         } else {
-            // document.getElementById('incorrect2').style.display = 'block';
+            document.getElementById('incorrect2').style.display = 'block';
             document.getElementById('loginName').style.borderBottom = '2px solid red';
-            alert('User not found');
         }
     }
 }
@@ -66,8 +63,9 @@ function pageLoad() {
     if (balance.datas != undefined) {
         document.getElementById('innerContainer').innerHTML = balance.datas;
         document.getElementById('noHistory').style.display = 'none';
-    }else{
+    } else {
         document.getElementById('innerContainer').style.display = 'none';
+        document.getElementById('clearBtn').style.display = 'none'
     }
 }
 
@@ -93,7 +91,8 @@ function deposite() {
         incomeAmount.innerHTML = `&#8377; ${userDetails.income}`;
         document.getElementById('innerContainer').style.display = 'flex';
         document.getElementById('noHistory').style.display = 'none';
-        history(deposite.value, description.value, 'incomeHis');
+        document.getElementById('clearBtn').style.display = 'block';
+        history(deposite.value, description.value, 'incomeHis','<i class="fa-solid fa-plus" style="color: #198754;"></i>');
         let container = document.getElementById('innerContainer');
         userDetails.datas = container.innerHTML;
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
@@ -113,19 +112,41 @@ function withdraw() {
         console.log(userDetails);
         let depoAmount = Number(withdraw.value);
         console.log(depoAmount);
-        userDetails.userBalance -= depoAmount;
-        userDetails.expense += depoAmount;
-        amount.innerHTML = `&#8377; ${userDetails.userBalance}`;
-        expenseAmount.innerHTML = `&#8377; ${userDetails.expense}`;
-        document.getElementById('innerContainer').style.display = 'flex';
-        document.getElementById('noHistory').style.display = 'none';
-        history(withdraw.value, wpassword.value, 'expenseHis');
+        if (userDetails.userBalance > depoAmount) {
+            userDetails.userBalance -= depoAmount;
+            userDetails.expense += depoAmount;
+            amount.innerHTML = `&#8377; ${userDetails.userBalance}`;
+            expenseAmount.innerHTML = `&#8377; ${userDetails.expense}`;
+            document.getElementById('innerContainer').style.display = 'flex';
+            document.getElementById('noHistory').style.display = 'none';
+            document.getElementById('clearBtn').style.display = 'block';
+            history(withdraw.value, wpassword.value, 'expenseHis','<i class="fa-solid fa-minus" style="color: #dc3545;"></i>');
+            let container = document.getElementById('innerContainer');
+            userDetails.datas = container.innerHTML;
+            localStorage.setItem("userDetails", JSON.stringify(userDetails));
+            withdraw.value = '';
+            wpassword.value = '';
+        } else {
+            alert('Expense is more than your balance');
+        }
+    }
+}
+
+
+function clearHistory() {
+    let status = confirm("Do you want to clear history Are you sure ?");
+    if (status) {
+        document.getElementById('expenseHis').innerHTML = null;
+        document.getElementById('incomeHis').innerHTML = null;
+        document.getElementById('innerContainer').style.display = 'none';
+        document.getElementById('noHistory').style.display = 'block';
+        document.getElementById('clearBtn').style.display = 'none'
+        let userDetails = JSON.parse(localStorage.getItem("userDetails"));
         let container = document.getElementById('innerContainer');
         userDetails.datas = container.innerHTML;
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
-        withdraw.value = '';
-        wpassword.value = '';
     }
+
 }
 
 function resetBalance(balanceType) {
@@ -144,7 +165,7 @@ function clearAll() {
 }
 
 
-function history(amount, source, container) {
+function history(amount, source, container,tag) {
     let mainDiv = document.getElementById(container);
     let div = document.createElement('div');
     div.classList.add("history");
@@ -152,7 +173,7 @@ function history(amount, source, container) {
     p1.innerHTML = source;
     div.appendChild(p1);
     let p2 = document.createElement('p');
-    p2.innerHTML = `&#8377; ${amount}`;
+    p2.innerHTML = `${tag}    &#8377; ${amount}`;
     div.appendChild(p2);
     mainDiv.appendChild(div);
     console.log('hello');

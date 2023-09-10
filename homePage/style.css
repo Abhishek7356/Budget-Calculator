@@ -1,7 +1,7 @@
-
-*{
+* {
     margin: 0;
     padding: 0;
+    /* letter-spacing: 1px; */
 }
 
 header img {
@@ -9,39 +9,49 @@ header img {
     border-radius: 50%;
     margin-right: 5px;
 }
- /* .outerBox{
+
+/* .outerBox{
     border: 1px solid red;
     padding: 10px 20px;
 } */
-.balance{
+.balance {
     padding: 30px;
     background-color: rgb(69, 69, 235);
     color: white;
     border-radius: 5px;
-} 
-.balanceDetails{
+}
+
+i{
+    margin: 0 4px;
+}
+
+.balanceDetails {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
 }
-.balanceDetails p{
+
+.balanceDetails p {
     margin: 0;
 }
-.buttons{
+
+.buttons {
     display: flex;
     justify-content: space-between;
     gap: 5px;
     padding-top: 5px;
 }
-.buttons button{
+
+.buttons button {
     width: 50%;
 }
-.balanceDetails p{
+
+.balanceDetails p {
     font-size: 15px;
 }
 
-.history{
+.history {
     display: flex;
     justify-content: space-around;
     font-size: 18px;
@@ -49,21 +59,23 @@ header img {
     padding: 5px;
     border-radius: 4px;
 }
-.history p{
+
+.history p {
     margin: 0;
 }
-#expenseHis .history{
+
+#expenseHis .history {
     border: 1px solid red;
 }
-#incomeHis .history{
+
+#incomeHis .history {
     border: 1px solid green;
 }
-.small{
+
+.small {
     margin-top: 100px;
     text-align: center;
 }
 
 
-@media screen and (max-width: 600px) {
-    
-}
+@media screen and (max-width: 600px) {}

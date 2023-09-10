@@ -1,57 +1,72 @@
-
-
-header img{
+header img {
     width: 40px;
     border-radius: 50%;
     margin-right: 5px;
 }
-header{
+
+header {
     background-color: rgb(186, 183, 183);
 }
-.innerLogin{
+
+.innerLogin {
     border-radius: 6px;
 }
-.login h4{
+
+.login h4 {
     display: inline;
 }
-.inputBox{
+
+.inputBox {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding:50px 0 25px;
+    gap: 15px;
+    padding: 50px 0 25px;
 }
 
-input{
+input {
     outline: 0;
-    border:0;
+    border: 0;
     border-bottom: 2px solid white;
     padding: 10px 15px;
     background: transparent;
     color: white;
     width: 100%;
 }
-small a{
+
+small a {
     text-decoration: none;
 }
 
 .button-34 {
-  background: #5E5DF0;
-  border-radius: 999px;
-  box-shadow: #5E5DF0 0 10px 20px -10px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  opacity: 1;
-  outline: 0 solid transparent;
-  padding: 8px 18px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: fit-content;
-  word-break: break-word;
-  border: 0;
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+}
+
+.outerInput {
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.errorMsg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: none;
 }
